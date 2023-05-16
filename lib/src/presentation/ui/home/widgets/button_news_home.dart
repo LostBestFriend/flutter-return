@@ -18,8 +18,6 @@ class HomeNewsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var myGroup = AutoSizeGroup();
-
     return ListView.builder(
       itemCount: news.data!.length,
       itemBuilder: (context, index) => Padding(
@@ -30,7 +28,6 @@ class HomeNewsButton extends StatelessWidget {
             Expanded(
               child: SizedBox(
                 width: 300,
-                height: 300,
                 child: ElevatedButton(
                   onPressed: () => _launchUrl(news.data![index].url),
                   style: const ButtonStyle(
@@ -46,16 +43,18 @@ class HomeNewsButton extends StatelessWidget {
                               Expanded(
                                 child: AutoSizeText(
                                   news.data![index].title,
-                                  minFontSize: 20,
-                                  maxFontSize: 25,
+                                  minFontSize: 15,
+                                  maxFontSize: 20,
                                   maxLines: 5,
                                   style: const TextStyle(
                                     color: Colors.white,
                                   ),
-                                  group: myGroup,
                                 ),
                               ),
                             ],
+                          ),
+                          const SizedBox(
+                            height: 5,
                           ),
                           Row(
                             children: [
@@ -63,19 +62,24 @@ class HomeNewsButton extends StatelessWidget {
                                 child: AutoSizeText(
                                   news.data![index].publishedAt,
                                   minFontSize: 5,
-                                  maxFontSize: 15,
+                                  maxFontSize: 12,
                                   maxLines: 1,
-                                  group: myGroup,
                                 ),
                               ),
                             ],
                           ),
                         ],
                       ),
-                      Image.network(
-                        news.data![index].imageURL,
-                        width: 300,
-                        height: 250,
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(40),
+                          child: Image.network(
+                            news.data![index].imageURL,
+                            width: 300,
+                            height: 245,
+                          ),
+                        ),
                       )
                     ],
                   ),
